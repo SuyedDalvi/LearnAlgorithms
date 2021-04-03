@@ -1,5 +1,5 @@
 # Valid Parenthesis: (){}[]
-def isValidParenthesis(s) -> int:
+def isValidParenthesis(s) -> bool:
     isValid = True
     stack = []
     for c in s:
