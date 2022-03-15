@@ -200,4 +200,127 @@ function displayMatrix(matrix) {
     console.log(matrix);
 };
 
-setZeroes([[1,1,1],[1,0,1],[1,1,1]]);
+// setZeroes([[1,1,1],[1,0,1],[1,1,1]]);
+
+
+/**
+ * Incorrect attempt
+ * @param {number[][]} matrix
+ * @return {number[]}
+ */
+var spiralOrder_fail = function(matrix) {
+    
+    const moveRightwards = 0, moveDownwards = 1, moveLeftwards=2, moveUpwards=3;
+    const returnVal = [];
+    let  row=0, col=0, totalElements = matrix.length * matrix[0].length, boundary=0;
+    
+    let nextDirection = moveRightwards;
+    while(totalElements > returnVal.length ){
+
+        row = boundary ;
+        col = boundary ;
+        // move right
+        if(nextDirection === moveRightwards){
+            do{
+                returnVal.push(matrix[row][col]);
+                col++;
+            }while(col<matrix[0].length - boundary - 1) 
+            nextDirection = moveDownwards;
+
+            if(totalElements == returnVal.length) {
+                break;
+            }
+        }
+        console.log(returnVal);
+
+        //move down
+        if(nextDirection === moveDownwards) {
+            while(row < matrix.length - boundary - 1 ){
+                returnVal.push(matrix[row][col]);
+                row++;
+            }
+            nextDirection = moveLeftwards;
+            
+
+        }
+        console.log(returnVal);
+
+        //move left
+        if(nextDirection === moveLeftwards){
+            while(col > boundary ){
+                returnVal.push(matrix[row][col--]);
+            }
+            nextDirection = moveUpwards
+            
+        }
+        console.log(returnVal);
+
+
+        //move up
+        if(nextDirection === moveUpwards){
+            while(row > boundary ) {
+                returnVal.push(matrix[row--][col]);
+            }
+            nextDirection = moveRightwards
+            
+        }
+        console.log(returnVal);
+        boundary++;
+    }
+    
+    console.log(returnVal);
+    
+    
+};
+
+var spiralOrder = function (matrix) {
+
+    let returnVal = [];
+
+    let rows = matrix.length;
+    let cols = matrix[0].length;
+
+    let top = 0;
+    let down = rows - 1;
+    let left = 0;
+    let right = cols - 1;
+
+    while(rows*cols > returnVal.length){
+
+        // move right
+        for (let col = left; col <= right; col++) {
+            returnVal.push(matrix[top][col]);
+        }
+
+        for (let row = top + 1; row <= down; row++) {
+            returnVal.push(matrix[row][right]);
+        }
+
+        if(top != down){
+            for (let col = right - 1; col >= left; col--) {
+                returnVal.push(matrix[down][col])
+            }
+        }
+        
+
+        if(left != right){
+            for(let row = down - 1; row > top; row--) {
+                returnVal.push(matrix[row][left])
+            }
+        }
+        
+
+
+        left++;
+        right--;
+        top++;
+        down--;
+
+    }
+
+    return returnVal;
+
+}
+
+const matrix = [[1,12]];
+console.log(spiralOrder(matrix));
