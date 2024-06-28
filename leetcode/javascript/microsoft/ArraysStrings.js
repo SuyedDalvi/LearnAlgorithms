@@ -93,20 +93,52 @@ function lengthOfLongestSubstring(s) {
     let indexMap = {};
     let maxlength = 0;
     let i=0, j=0;
-    while(i< s.length) {
-        if(s[i] in indexMap){
+    // while(i< s.length) {
+    //     if(s[i] in indexMap){
      
-            j = Math.max(indexMap[s[i]],j);
+    //         j = Math.max(indexMap[s[i]],j);
             
-        } 
-        maxlength = Math.max(maxlength, i - j + 1);
-        indexMap[s[i]] = i+1;
+    //     } 
+    //     maxlength = Math.max(maxlength, i - j + 1);
+    //     indexMap[s[i]] = i+1;
         
-        i++;
+    //     i++;
+    // }
+    // return maxlength;
+/**
+ * Better Solution
+ * 
+ * for(let i=0; i < s.length; i++){
+        if(s[i] in charMap && charMap[s[i]] >= j){
+            j = charMap[s[i]] + 1;
+        }
+        charMap[s[i]] = i
+        maxLength = Math.max(maxLength, i-j+1)
     }
-    return maxlength;
+    return maxLength;
+ */
 
+/**
+ * Sliding window approach
+ * 
+ *  let set = new Set()
+    let start = 0;
+    for(let end = 0; end < s.length; end++){
+        
+        while(set.has(s[i])){
+            set.delete(s[start])
+            start++;
+        }
 
+        set.add(s[end])
+        maxlength = Math.max(maxlength, end - start + 1)
+
+    }
+    return maxlength
+ * 
+ */
+
+    
 };
 
 
@@ -323,4 +355,54 @@ var spiralOrder = function (matrix) {
 }
 
 const matrix = [[1,12]];
-console.log(spiralOrder(matrix));
+// console.log(spiralOrder(matrix));
+
+const hasNegativeNumbers = (nums) => {
+    let hasNegativeNumber= false;
+
+
+
+
+    nums.sort((a,b) => a - b)
+
+    console.log(nums);
+
+    if(nums[0] < 0) {
+        hasNegativeNumber = true;
+    }
+
+    return hasNegativeNumber
+}
+
+const twoSum = (nums, target) => {
+
+}
+const threeSum = function(nums) {
+
+    console.log('inside three sum', nums)
+    var result = []
+
+    if(nums.length < 3) {
+        return result
+    }
+
+    if(hasNegativeNumbers(nums)){
+        console.log('there are negative numbers in the array')
+
+        let i=0
+        while(nums[i] < 0 ) {
+            num = nums.shift();
+            
+            i++
+        }
+
+    }else {
+        return result
+    }
+
+
+    return result
+}
+
+
+console.log(threeSum([1,2,-3]))

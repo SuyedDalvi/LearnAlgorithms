@@ -49,3 +49,25 @@ function sum(x)  {
         return y?sum(x+y):x;
     }
 }
+
+// High order functions
+const TWO_PI = 2 * Math.PI;
+
+var calcDiameter = (r) => r * 2;
+
+var calcArea = (r) => Math.PI * Math.pow(r,2);
+
+var calcCircum = (r) => TWO_PI * r;
+
+Array.prototype.circle = function (parameters) {
+    let output = [];
+    for(let i=0; i< this.length; i++){
+        output.push(parameters(this[i]));
+    }
+    return output;
+}
+
+let radius = [2,3,4,5];
+console.log(radius.circle(calcDiameter))
+console.log(radius.circle(calcArea));
+console.log(radius.circle(calcCircum))

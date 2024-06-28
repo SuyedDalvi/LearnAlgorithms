@@ -1,0 +1,57 @@
+/*
+# IP address|Visitor ID|Visit Date|Request|Status|Size
+199.130.220.13|ABC123DEF456|2022-01-01T00:00:02+0000|"GET / HTTP/1.1"|200|12326
+199.130.220.13|ABC123DEF456|2022-01-01T00:01:16+0000|"GET /products/search?c=shirts HTTP/1.1"|200|64145
+21.10.42.81|412VEG91AZX|2022-01-01T00:02:53+0000|"GET /profile HTTP/1.1"|200|3456
+199.130.220.13|ABC123DEF456|2022-01-01T00:05:30+0000|"GET /products/ABCZXY/Fashion-Shirt HTTP/1.1"|200|85447
+*/
+/*
+* visitors = Set
+* lines = 
+* fields = line.split('|')
+* visitors.add(fields[1])
+*/
+
+const fs = require('fs')
+const visitors = new Set();
+
+var extractUserId = (line) => {
+    const fields = line.split("|");
+    return fields[1];
+}
+
+var parseLogs(filename1) =>{
+    
+    // creating a stream
+    var rs = fs.createReadStream(filename)
+    obj = {day1: [],
+        finalRes: []
+    }
+    
+    for await (const line of rs){
+        v = extractUserId(line)
+        if(obj[day1].has(v))
+            visitors.add(v)
+        
+    }
+    
+
+    return visitors;
+    
+}
+
+var extract(file1, file2) => {
+    
+    
+    const day1visitors = parseLogs(file1)
+    const day2visitors = parseLogs(file2)
+    
+//    var result = day1visitors.filter(visitor => {
+//        return day2visitors.has(visitor)
+//    })
+  
+    const result = new Set()
+    
+    return result
+    
+}
